@@ -11,6 +11,7 @@
     "url": "git+https://github.com/willnewii/homebridge-willhome.git"
   },
   "keywords": [
+    "homebridge-plugin",
     "homebridge",
     "plugin"
   ],

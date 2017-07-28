@@ -1,8 +1,9 @@
 # homebridge-plantower
 
-Homebridge plugin for plantower sensors
+Homebridge plugin for plantower sensors/wiring-pi
 
 Based on [node-plantower](https://github.com/perfectworks/node-plantower)
+Based on [node-wiring-pi](https://github.com/rsg98/node-wiring-pi)
 
 [![npm version](https://badge.fury.io/js/homebridge-smartthings.svg)](https://badge.fury.io/js/homebridge-smartthings)
 Current version - 0.0.1
@@ -15,7 +16,7 @@ Current version - 0.0.1
 > gyp WARN EACCES user "root" does not have permission to access the dev dir "/root/.node-gyp/5.5.0"
 
 1. Install homebridge using: npm install -g homebridge
-2. Install this plugin using: npm install -g homebridge-plantower
+2. Install this plugin using: npm install -g https://github.com/willnewii/homebridge-willhome
 
 #### edit file
 ```
