@@ -1,0 +1,8 @@
+{
+    "accessories": [{
+        "accessory": "willHome",
+        "name": "willHome",
+        "model": "PMS5003ST",
+        "device": "/dev/ttyAMA0"
+    }]
+}
