@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/willnewii/homebridge-willHome.git"
+    "url": "git+https://github.com/willnewii/homebridge-willhome.git"
   },
   "keywords": [
     "homebridge",
@@ -17,7 +17,7 @@
   "author": "willnewii@163.com",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/willnewii/homebridge-willHome/issues"
+    "url": "https://github.com/willnewii/homebridge-willhome/issues"
   },
   "dependencies": {
     "plantower": "1.1.5",
@@ -27,5 +27,5 @@
     "node": ">=6.8.1",
     "homebridge": ">=0.4.6"
   },
-  "homepage": "https://github.com/willnewii/homebridge-willHome#readme"
+  "homepage": "https://github.com/willnewii/homebridge-willhome#readme"
 }
