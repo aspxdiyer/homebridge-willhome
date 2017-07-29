@@ -15,11 +15,6 @@ function factory(name, _callback, isHsl, _hsl) {
     const service = new Service.Lightbulb(name, name);
 
     service.getCharacteristic(Characteristic.On)
-        .on('get', (callback) => {
-            this.log(_name + ' Get On ');
-
-            callback(null, true);
-        })
         .on('set', (value, callback) => {
             this.log(_name + ' Set On ', value);
             _callback && _callback(name, CallBackTypes.State, value);
