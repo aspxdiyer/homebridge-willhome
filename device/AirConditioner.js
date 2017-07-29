@@ -15,7 +15,7 @@ function factory(name, _callback) {
     service.getCharacteristic(Characteristic.On)
         .on('get', (callback) => {
             this.log(_name + ' Get On :');
-            callback(null, true);
+            //callback(null, true);
         })
         .on('set', (value, callback) => {
             this.log(_name + ' Set On :', value);
