@@ -6,8 +6,8 @@ const AirConditioner = require('./device/AirConditioner');
 
 const Util = require('./device/Util');
 
+const WiringHelper = require('./action/WiringHelper')
 const Plantower = require('plantower');
-const wpi = require('node-wiring-pi');
 var exec = require('child_process').exec;
 
 var Accessory, Service, Characteristic, UUIDGen;
@@ -57,7 +57,7 @@ function willHome(log, config, api) {
 	this.Characteristic = Characteristic;
 
 	this.initServices();
-	this.initGPIO();
+	this.initLightBulb();
 
 	this.plantower = new Plantower(config['model'], config['device']);
 	setInterval(() => {
@@ -86,7 +86,7 @@ willHome.prototype.initServices = function () {
 	devices.sensor.push(services.length - 1);
 
 	//普通灯泡
-	let lightbulb3Service = LightBulb.bind(this)('灯', this.setLightBulb1);
+	let lightbulb3Service = LightBulb.bind(this)('灯', this.setLightBulb1.bind(this));
 	services.push(lightbulb3Service);
 	devices.lightbulb = services.length - 1;
 
@@ -101,24 +101,15 @@ willHome.prototype.initServices = function () {
 	devices.ac = services.length - 1;
 }
 
-willHome.prototype.initGPIO = function () {
-	wpi.wiringPiSetupGpio();
-
+willHome.prototype.initLightBulb = function () {
 	//普通灯泡 默认为关
-	wpi.pinMode(lightbulbPin, wpi.OUTPUT);
-	wpi.digitalWrite(lightbulbPin, 1);
+	this.wiringHelper1 = new WiringHelper(lightbulbPin);
+	this.wiringHelper1.initLightBulb();
 	this.getServices()[devices.lightbulb].setCharacteristic(Characteristic.On, false);
 
 	//彩色灯泡 设置
-	if (wpi.softPwmCreate(redPin, 0, 100)) {
-		console.log('Failed to create Red PWM channel on pin ' + redPin);
-	}
-	if (wpi.softPwmCreate(greenPin, 0, 100)) {
-		console.log('Failed to create Green PWM channel on pin ' + greenPin);
-	}
-	if (wpi.softPwmCreate(bluePin, 0, 100)) {
-		console.log('Failed to create Blue PWM channel on pin ' + bluePin);
-	}
+	this.wiringHelper2 = new WiringHelper([redPin,greenPin,bluePin]);
+	this.wiringHelper2.initLightBulb();
 
 	this.getServices()[devices.lightbulbSmart].setCharacteristic(Characteristic.Hue, 255);
 	this.getServices()[devices.lightbulbSmart].setCharacteristic(Characteristic.Saturation, 68);
@@ -131,29 +122,19 @@ willHome.prototype.getServices = function () {
 
 willHome.prototype.setLightBulb1 = function (name, type, value) {
 	if (type === CallBackTypes.State) {
-		wpi.digitalWrite(lightbulbPin, value ? 0 : 1);
+		this.wiringHelper1.setLightBulbOnOff(value);
 	}
 }
 
 willHome.prototype.setLightBulb2 = function (name, type, value) {
 	if (type === CallBackTypes.State) {
 		if (value != this.getServices()[devices.lightbulbSmart].getCharacteristic(Characteristic.On).value) {
-			if (value) {
-				setColor([8, 4, 21]);
-			} else {
-				setColor([0, 0, 0]);
-			}
+			this.wiringHelper2.setLightBulbOnOff(value);
 		}
 	} else if (type === CallBackTypes.RGB) {
 		console.log(name, type, value);
-		setColor(Util.hslToRgb(value));
+		this.wiringHelper2.setLightBulbColor(Util.hslToRgb(value));
 	}
-}
-
-function setColor(rgb) {
-	wpi.softPwmWrite(redPin, parseInt(rgb[0] / 256 * 100));
-	wpi.softPwmWrite(greenPin, parseInt(rgb[1] / 256 * 100));
-	wpi.softPwmWrite(bluePin, parseInt(rgb[2] / 256 * 100));
 }
 
 /**

@@ -51,10 +51,6 @@ function factory(name, _callback, isHsl, _hsl) {
         if (Object.prototype.toString.call(_hsl) === '[object Array]' && _hsl.length === 3) {
             hsl = _hsl
         }
-
-        service.setCharacteristic(Characteristic.Hue, hsl[0])
-        service.setCharacteristic(Characteristic.Saturation, hsl[1])
-        service.setCharacteristic(Characteristic.Brightness, hsl[2])
     }
 
     return service

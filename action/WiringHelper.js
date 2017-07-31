@@ -1,6 +1,6 @@
 const wpi = require('node-wiring-pi');
 
-class wiringHelper {
+class WiringHelper {
     constructor(pin) {
         wpi.wiringPiSetupGpio();
 
@@ -42,3 +42,5 @@ class wiringHelper {
         wpi.softPwmWrite(this.pin[2], parseInt(rgb[2] / 256 * 100));
     }
 }
+
+module.exports = WiringHelper ;
