@@ -91,7 +91,7 @@ willHome.prototype.initServices = function () {
 	devices.lightbulb = services.length - 1;
 
 	//调色灯泡
-	let lightbulb2Service = LightBulb.bind(this)('彩灯', this.setLightBulb2.bind(this), true, [10, 10, 50]);
+	let lightbulb2Service = LightBulb.bind(this)('彩灯', this.setLightBulb2.bind(this), true);
 	services.push(lightbulb2Service);
 	devices.lightbulbSmart = services.length - 1;
 
