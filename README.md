@@ -59,7 +59,7 @@ homebridge
 ## 截图
 ### 设备照片
 ![设备照片](http://obfmtiyt5.bkt.clouddn.com/img%2FIMG_CE8F8A0B79B1-1.jpg-iphone)
-### 添加至homekit
+### 添加至homekit
 ![homekit截图](http://obfmtiyt5.bkt.clouddn.com/img%2FIMG_0624.PNG-iphone)
 ### 通过siri操作设备
 ![Siri截图](http://obfmtiyt5.bkt.clouddn.com/img%2FIMG_0623.PNG-iphone)
